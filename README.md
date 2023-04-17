@@ -1,9 +1,9 @@
 # Microservices App
 
 To run k8s environment:
-- Make sure to have a K8s cluster running (I recommend Docker Desktop K8s cluster)
+- Make sure to have a k8s cluster running (I recommend Docker Desktop k8s cluster)
 - build services images
-- run K8s-startup.sh shell script
+- run k8s-startup.sh shell script
 
 For Testing purposes you can expose a pod using port forwarding:
 ```bash
