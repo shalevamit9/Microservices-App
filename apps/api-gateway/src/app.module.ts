@@ -1,21 +1,13 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-import configLoader from 'config';
+import { ConfigModule, ConfigService } from 'config';
 import { ClientProxyFactory, Transport } from '@nestjs/microservices';
 import { HttpModule } from '@nestjs/axios';
 import { LoggerModule } from 'logger';
 
 @Module({
-  imports: [
-    ConfigModule.forRoot({
-      isGlobal: true,
-      load: [configLoader],
-    }),
-    HttpModule,
-    LoggerModule,
-  ],
+  imports: [ConfigModule.register({}), HttpModule, LoggerModule],
   controllers: [AppController],
   providers: [
     AppService,
@@ -25,8 +17,8 @@ import { LoggerModule } from 'logger';
         return ClientProxyFactory.create({
           transport: Transport.TCP,
           options: {
-            host: configService.get('userServiceUrl'),
-            port: configService.get('userServicePort'),
+            host: configService.get().userServiceUrl,
+            port: configService.get().userServicePort,
           },
         });
       },

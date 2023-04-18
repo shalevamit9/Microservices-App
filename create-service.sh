@@ -20,3 +20,8 @@ json='{\n  "extends": "../../tsconfig.json",\n  "compilerOptions": {\n    "decla
 printf "$json" > ./tsconfig.json
 
 echo "docker build -t $SERVICE_NAME -f ./Dockerfile --build-arg service=$SERVICE_NAME ." > create-docker-image.sh
+
+mkdir envs
+cd ./envs
+touch development.env
+touch production.env

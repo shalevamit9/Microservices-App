@@ -1,12 +1,12 @@
 import { Controller, Get, Inject } from '@nestjs/common';
 import { AppService } from './app.service';
 import { ClientProxy } from '@nestjs/microservices';
-import { Observable, tap } from 'rxjs';
+import { tap } from 'rxjs';
 import { HttpService } from '@nestjs/axios';
-import { ConfigService } from '@nestjs/config';
 import { AxiosResponse } from 'axios';
 import { ILoggerService } from 'logger';
 import { randomUUID } from 'node:crypto';
+import { ConfigService } from 'config';
 
 @Controller()
 export class AppController {
@@ -19,7 +19,7 @@ export class AppController {
   ) {}
 
   @Get()
-  getHello(): Observable<string> {
+  getHello() {
     this.logger.log('hello from AppController', {
       correlationId: randomUUID(),
       username: 'App',
