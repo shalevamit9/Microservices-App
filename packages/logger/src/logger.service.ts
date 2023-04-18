@@ -25,4 +25,8 @@ export class LogstashLoggerService extends ILoggerService {
   verbose(message: string, additionalParams: Record<string, any>): void {
     this.logger.verbose(message, additionalParams);
   }
+
+  log(message: string, additionalParams: Record<string, any>): void {
+    this.info(message, additionalParams);
+  }
 }

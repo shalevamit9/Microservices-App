@@ -20,7 +20,7 @@ export class AppController {
 
   @Get()
   getHello(): Observable<string> {
-    this.logger.info('hello from AppController', {
+    this.logger.log('hello from AppController', {
       correlationId: randomUUID(),
       username: 'App',
       password: 'Controller',

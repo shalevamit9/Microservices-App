@@ -5,4 +5,6 @@ export abstract class ILoggerService {
     message: string,
     additionalParams: Record<string, any>,
   ): void;
+
+  abstract log(message: string, additionalParams: Record<string, any>): void;
 }
