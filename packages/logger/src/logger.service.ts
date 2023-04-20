@@ -1,10 +1,13 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, OnApplicationShutdown } from '@nestjs/common';
 import { ILoggerService } from './logger.interface';
 import winston from 'winston';
 import LogstashTransport from 'winston-logstash/lib/winston-logstash-latest';
 
 @Injectable()
-export class LogstashLoggerService extends ILoggerService {
+export class LogstashLoggerService
+  extends ILoggerService
+  implements OnApplicationShutdown
+{
   logger: winston.Logger;
   constructor() {
     super();
@@ -28,5 +31,16 @@ export class LogstashLoggerService extends ILoggerService {
 
   log(message: string, additionalParams: Record<string, any>): void {
     this.info(message, additionalParams);
+  }
+
+  onApplicationShutdown(signal?: string) {
+    this.logger.info(
+      `onApplicationShutdown has been called with signal ${signal}`,
+    );
+    this.closeLoggerConnection();
+  }
+
+  private closeLoggerConnection() {
+    this.logger.close();
   }
 }

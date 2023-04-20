@@ -1,4 +1,5 @@
-FROM node:18.5.0-alpine3.16 as builder
+# sha is for node:18.16.0-slim
+FROM node:lts-slim@sha256:09714f3334c1cda4ffac832880b57fc9c72253dd365ce7fa3ff1d1705aa9435a as builder
 
 ARG service
 
@@ -15,10 +16,10 @@ COPY ./apps/$service ./apps/$service
 
 RUN npm run build
 
-FROM node:18.5.0-alpine3.16 as prod-builder
+# sha is for node:18.16.0-slim
+FROM node:lts-slim@sha256:09714f3334c1cda4ffac832880b57fc9c72253dd365ce7fa3ff1d1705aa9435a as prod-builder
 
 ARG service
-
 ENV NODE_ENV=production
 
 WORKDIR /usr/src/app
@@ -34,24 +35,27 @@ RUN npm ci
 
 COPY --from=builder /usr/src/app/apps/$service/dist ./dist/
 
-FROM node:18.5.0-alpine3.16
+# sha is for node:18.16.0-alpine3.17
+FROM node:lts-alpine@sha256:44aaf1ccc80eaed6572a0f2ef7d6b5a2982d54481e4255480041ac92221e2f11
 # FROM gcr.io/distroless/nodejs18-debian11
+RUN apk add dumb-init
 
 ARG service
-
 ENV NODE_ENV=production
+
+USER node
 
 WORKDIR /usr/src/app
 
-COPY --from=prod-builder /usr/src/app/apps/$service ./apps/$service/
-COPY --from=prod-builder /usr/src/app/node_modules ./node_modules/
-COPY --from=prod-builder /usr/src/app/packages ./packages/
+COPY --chown=node:node --from=prod-builder /usr/src/app/apps/$service ./apps/$service/
+COPY --chown=node:node --from=prod-builder /usr/src/app/node_modules ./node_modules/
+COPY --chown=node:node --from=prod-builder /usr/src/app/packages ./packages/
 
 EXPOSE 3000
 
 WORKDIR /usr/src/app/apps/$service/dist
 
-CMD ["node", "main.js"]
+CMD ["dumb-init", "node", "main.js"]
 
 # distroless CMD
 # CMD ["main.js"]
