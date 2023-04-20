@@ -1,10 +1,16 @@
 export abstract class ILoggerService {
-  abstract info(message: string, additionalParams: Record<string, any>): void;
-
-  abstract verbose(
+  public abstract info(
     message: string,
     additionalParams: Record<string, any>,
   ): void;
 
-  abstract log(message: string, additionalParams: Record<string, any>): void;
+  public abstract verbose(
+    message: string,
+    additionalParams: Record<string, any>,
+  ): void;
+
+  public abstract log(
+    message: string,
+    additionalParams: Record<string, any>,
+  ): void;
 }

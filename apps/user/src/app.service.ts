@@ -3,8 +3,9 @@ import { ILoggerService } from 'logger';
 
 @Injectable()
 export class AppService {
-  constructor(private readonly logger: ILoggerService) {}
-  getHello(): string {
+  public constructor(private readonly logger: ILoggerService) {}
+
+  public getHello(): string {
     return 'Hello from User service';
   }
 }

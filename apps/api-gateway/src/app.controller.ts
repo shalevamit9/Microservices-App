@@ -10,7 +10,7 @@ import { ConfigService } from 'config';
 
 @Controller()
 export class AppController {
-  constructor(
+  public constructor(
     private readonly appService: AppService,
     @Inject('USER_SERVICE') private readonly userService: ClientProxy,
     private readonly httpService: HttpService,
@@ -19,7 +19,7 @@ export class AppController {
   ) {}
 
   @Get()
-  getHello() {
+  public getHello() {
     this.logger.log('hello from AppController', {
       correlationId: randomUUID(),
       username: 'App',

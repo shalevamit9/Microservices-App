@@ -8,8 +8,9 @@ export class LogstashLoggerService
   extends ILoggerService
   implements OnApplicationShutdown
 {
-  logger: winston.Logger;
-  constructor() {
+  private readonly logger: winston.Logger;
+
+  public constructor() {
     super();
     this.logger = winston.createLogger({
       transports: [
@@ -21,19 +22,19 @@ export class LogstashLoggerService
     });
   }
 
-  info(message: string, additionalParams: Record<string, any>): void {
+  public info(message: string, additionalParams: Record<string, any>): void {
     this.logger.info(message, additionalParams);
   }
 
-  verbose(message: string, additionalParams: Record<string, any>): void {
+  public verbose(message: string, additionalParams: Record<string, any>): void {
     this.logger.verbose(message, additionalParams);
   }
 
-  log(message: string, additionalParams: Record<string, any>): void {
+  public log(message: string, additionalParams: Record<string, any>): void {
     this.info(message, additionalParams);
   }
 
-  onApplicationShutdown(signal?: string) {
+  public onApplicationShutdown(signal?: string) {
     this.logger.info(
       `onApplicationShutdown has been called with signal ${signal}`,
     );

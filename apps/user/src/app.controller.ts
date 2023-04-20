@@ -5,18 +5,18 @@ import { ConfigService } from 'config';
 
 @Controller()
 export class AppController {
-  constructor(
+  public constructor(
     private readonly appService: AppService,
     private readonly config: ConfigService,
   ) {}
 
   @Get()
-  getHello(): string {
+  public getHello(): string {
     return this.appService.getHello();
   }
 
   @MessagePattern('hello')
-  accumulate(name: string): string {
+  public accumulate(name: string): string {
     console.log({
       PORT: this.config.get().userServicePort,
     });

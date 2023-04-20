@@ -8,7 +8,7 @@ import path from 'path';
 export class ConfigService {
   private readonly config: EnvConfig;
 
-  constructor(@Inject(CONFIG_OPTIONS) options: Record<string, any>) {
+  public constructor(@Inject(CONFIG_OPTIONS) options: Record<string, any>) {
     const envFilePath = this.getEnvFilePath();
     this.loadEnv(envFilePath);
     this.config = this.initializeEnvConfig();
@@ -34,7 +34,7 @@ export class ConfigService {
     dotenv.config({ path });
   }
 
-  get(): EnvConfig {
+  public get(): EnvConfig {
     return this.config;
   }
 }

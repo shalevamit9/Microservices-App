@@ -23,5 +23,6 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'off',
     "quotes": [2, "single"],
     "indent": ["error", 2],
+    "@typescript-eslint/explicit-member-accessibility": "error",
   },
 };

@@ -4,7 +4,7 @@ import { CONFIG_OPTIONS } from './config.constants';
 
 @Module({})
 export class ConfigModule {
-  static register(options: Record<string, any>): DynamicModule {
+  public static register(options: Record<string, any>): DynamicModule {
     return {
       module: ConfigModule,
       providers: [
