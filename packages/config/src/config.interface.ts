@@ -5,4 +5,5 @@ export type EnvConfig = {
   emailServicePort: number;
   userServicePort: number;
   userServiceUrl: string;
+  hostname: string;
 };

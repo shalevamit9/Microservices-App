@@ -26,6 +26,7 @@ export class ConfigService {
       emailServicePort: parseInt(process.env.EMAIL_SERVICE_PORT),
       userServicePort: parseInt(process.env.USER_SERVICE_PORT),
       userServiceUrl: process.env.USER_SERVICE_URL,
+      hostname: process.env.HOSTNAME || '0.0.0.0',
     };
   }
 
