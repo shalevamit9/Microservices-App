@@ -16,16 +16,16 @@ async function bootstrap() {
   // });
   // await app.startAllMicroservices();
 
-  // async function gracefullyShutdown() {
-  //   await app.close();
-  // }
-
-  // process.once('SIGTERM', gracefullyShutdown);
-  // process.once('SIGINT', gracefullyShutdown);
-
   // For HTTP communication
   const app = await NestFactory.create(AppModule);
   const config = app.get(ConfigService);
   await app.listen(config.get().userServicePort);
+
+  async function gracefullyShutdown() {
+    await app.close();
+  }
+
+  process.once('SIGTERM', gracefullyShutdown);
+  process.once('SIGINT', gracefullyShutdown);
 }
 bootstrap();
