@@ -4,27 +4,28 @@ import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 import { ConfigService } from 'config';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  const config = app.get(ConfigService);
+  // const app = await NestFactory.create(AppModule);
+  // const config = app.get(ConfigService);
 
-  app.connectMicroservice<MicroserviceOptions>({
-    transport: Transport.TCP,
-    options: {
-      port: config.get().userServicePort,
-      host: config.get().hostname,
-    },
-  });
-  await app.startAllMicroservices();
+  // app.connectMicroservice<MicroserviceOptions>({
+  //   transport: Transport.TCP,
+  //   options: {
+  //     port: config.get().userServicePort,
+  //     host: config.get().hostname,
+  //   },
+  // });
+  // await app.startAllMicroservices();
 
-  async function gracefullyShutdown() {
-    await app.close();
-  }
+  // async function gracefullyShutdown() {
+  //   await app.close();
+  // }
 
-  process.once('SIGTERM', gracefullyShutdown);
-  process.once('SIGINT', gracefullyShutdown);
+  // process.once('SIGTERM', gracefullyShutdown);
+  // process.once('SIGINT', gracefullyShutdown);
 
   // For HTTP communication
-  // const app = await NestFactory.create(AppModule);
-  // await app.listen(3000);
+  const app = await NestFactory.create(AppModule);
+  const config = app.get(ConfigService);
+  await app.listen(config.get().userServicePort);
 }
 bootstrap();

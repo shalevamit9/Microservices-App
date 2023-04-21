@@ -5,9 +5,10 @@ import { ConfigModule, ConfigService } from 'config';
 import { ClientProxyFactory, Transport } from '@nestjs/microservices';
 import { HttpModule } from '@nestjs/axios';
 import { LoggerModule } from 'logger';
+import { UserModule } from './users/user.module';
 
 @Module({
-  imports: [ConfigModule.register({}), HttpModule, LoggerModule],
+  imports: [ConfigModule.register({}), HttpModule, LoggerModule, UserModule],
   controllers: [AppController],
   providers: [
     AppService,
