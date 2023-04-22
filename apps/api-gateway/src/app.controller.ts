@@ -1,6 +1,5 @@
-import { Controller, Get, Inject, OnModuleInit } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
-import { ClientKafka } from '@nestjs/microservices';
 import { ILoggerService } from 'logger';
 import { randomUUID } from 'node:crypto';
 import { ConfigService } from 'config';
@@ -11,7 +10,6 @@ import { KafkaService } from './kafka/kafka.service';
 export class AppController {
   public constructor(
     private readonly appService: AppService,
-    // @Inject('EMAIL_SERVICE') private readonly emailService: ClientKafka,
     private readonly emailService: KafkaService,
     private readonly config: ConfigService,
     private readonly logger: ILoggerService,
@@ -34,8 +32,4 @@ export class AppController {
 
     return await this.userHttpService.getAllUsers();
   }
-
-  // public async onModuleInit() {
-  //   await this.emailService.connect();
-  // }
 }
