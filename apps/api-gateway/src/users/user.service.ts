@@ -16,11 +16,6 @@ export class UserService {
     const userServiceUrl = this.config.get().userServiceUrl;
     const userServicePort = this.config.get().userServicePort;
 
-    this.emailService.emit('send.email', {
-      from: 'UserService',
-      message: 'helo wassuuupp',
-    });
-
     return await firstValueFrom(
       this.httpService
         .get(`http://${userServiceUrl}:${userServicePort}`)

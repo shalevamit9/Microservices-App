@@ -20,8 +20,10 @@ export class AppController {
   public async getHello() {
     this.logger.log('hello from AppController', {
       correlationId: randomUUID(),
-      username: 'App',
-      password: 'Controller',
+      user: {
+        username: 'App',
+        password: 'Controller',
+      },
     });
 
     this.emailService.emit('send.email', {
