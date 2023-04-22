@@ -29,12 +29,19 @@ spec:
       containers:
       - name: email
         image: email
+        imagePullPolicy: IfNotPresent
         resources:
           limits:
-            memory: 32Mi
+            memory: 64Mi
             cpu: "0.25"
           requests:
             memory: 4Mi
             cpu: "0.1"
         ports:
         - containerPort: 3000
+        env:
+          - name: KAFKA_URI
+            valueFrom:
+              configMapKeyRef:
+                name: config-map
+                key: kafka-uri

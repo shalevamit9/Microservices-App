@@ -6,4 +6,5 @@ export type EnvConfig = {
   userServicePort: number;
   userServiceUrl: string;
   hostname: string;
+  kafkaUri: string;
 };

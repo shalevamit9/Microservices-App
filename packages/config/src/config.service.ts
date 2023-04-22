@@ -20,13 +20,14 @@ export class ConfigService {
 
   private initializeEnvConfig(): EnvConfig {
     return {
+      hostname: process.env.HOSTNAME || '0.0.0.0',
       apiGatewayServicePort: parseInt(process.env.API_GATEWAY_SERVICE_PORT),
       apiGatewayServiceUrl: process.env.API_GATEWAY_SERVICE_URL,
       emailServiceUrl: process.env.EMAIL_SERVICE_URL,
       emailServicePort: parseInt(process.env.EMAIL_SERVICE_PORT),
       userServicePort: parseInt(process.env.USER_SERVICE_PORT),
       userServiceUrl: process.env.USER_SERVICE_URL,
-      hostname: process.env.HOSTNAME || '0.0.0.0',
+      kafkaUri: process.env.KAFKA_URI,
     };
   }
 

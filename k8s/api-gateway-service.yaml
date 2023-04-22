@@ -72,3 +72,8 @@ spec:
               configMapKeyRef:
                 name: config-map
                 key: api-gateway-service-port
+          - name: KAFKA_URI
+            valueFrom:
+              configMapKeyRef:
+                name: config-map
+                key: kafka-uri

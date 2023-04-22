@@ -12,6 +12,7 @@ export class LogstashLoggerService
 
   public constructor() {
     super();
+    console.log(`initialized ${LogstashLoggerService.name}`);
     this.logger = winston.createLogger({
       transports: [
         new LogstashTransport({

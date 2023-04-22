@@ -2,29 +2,38 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from 'config';
-import { ClientProxyFactory, Transport } from '@nestjs/microservices';
+import { ClientsModule, Transport } from '@nestjs/microservices';
 import { HttpModule } from '@nestjs/axios';
 import { LoggerModule } from 'logger';
 import { UserModule } from './users/user.module';
+import { KafkaModule } from './kafka/kafka.module';
 
 @Module({
-  imports: [ConfigModule.register({}), HttpModule, LoggerModule, UserModule],
-  controllers: [AppController],
-  providers: [
-    AppService,
-    {
-      provide: 'USER_SERVICE',
-      useFactory: (configService: ConfigService) => {
-        return ClientProxyFactory.create({
-          transport: Transport.TCP,
-          options: {
-            host: configService.get().userServiceUrl,
-            port: configService.get().userServicePort,
-          },
-        });
-      },
-      inject: [ConfigService],
-    },
+  imports: [
+    ConfigModule,
+    HttpModule,
+    LoggerModule,
+    UserModule,
+    KafkaModule,
+    // ClientsModule.registerAsync([
+    //   {
+    //     imports: [ConfigModule],
+    //     name: 'EMAIL_SERVICE',
+    //     useFactory: (config: ConfigService) => ({
+    //       transport: Transport.KAFKA,
+    //       options: {
+    //         client: {
+    //           brokers: [config.get().kafkaUri],
+    //           clientId: 'API_GATEWAY_SERVICE',
+    //         },
+    //         producerOnlyMode: true,
+    //       },
+    //     }),
+    //     inject: [ConfigService],
+    //   },
+    // ]),
   ],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}

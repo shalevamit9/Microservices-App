@@ -27,6 +27,7 @@
     "@nestjs/platform-express": "^9.0.0",
     "axios": "^1.3.5",
     "config": "*",
+    "kafkajs": "^2.2.4",
     "logger": "*",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.2.0"

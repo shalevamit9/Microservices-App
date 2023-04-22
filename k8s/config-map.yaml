@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: config-map
 data:
-  kafka-url: kafka-service:9092
+  kafka-uri: kafka-service:9092
   zookeeper-url: zookeeper-service:2181
   user-service-url: user-service
   user-service-port: "3000"
