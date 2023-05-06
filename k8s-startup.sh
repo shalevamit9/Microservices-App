@@ -6,5 +6,6 @@ kubectl apply \
 -f k8s/config-map.yaml \
 -f k8s/api-gateway-service.yaml \
 -f k8s/user-service.yaml \
+-f k8s/email-service.yaml \
 -f k8s/zookeeper.yaml \
 -f k8s/kafka.yaml
