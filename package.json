@@ -11,7 +11,10 @@
     "dev": "set NODE_ENV=development&& turbo run dev",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "clean": "sh ./clean.sh"
+    "clean": "sh ./bin/clean.sh",
+    "k8s-startup": "sh ./bin/k8s-startup.sh",
+    "k8s-cleanup": "sh ./bin/k8s-cleanup.sh",
+    "create-service": "sh ./bin/create-service.sh"
   },
   "devDependencies": {
     "prettier": "latest",
